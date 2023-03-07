@@ -26,6 +26,9 @@ Singers are chosen from a ranking in a website, \href{https://www.thefamouspeopl
 Lyrics were obtained by using lyricsgenius, a python API of Genius.com.
 Since lyrics were fetched online, it includes some HTML tokens and some meta data about translation inside the lyrics.
 The meta data about translation are supposed to be removed by preprocessing.
+Also, there are some faulty data where texts are not lyrics or lyrics are too short because it is cut in the middle of a song.
+Too short lyrics where the total length is under 300 characters are removed automatically, and too long data are removed manually by inspecting the text.
+To minimise the duplication of a same song, songs including certain keywords,such as "remix", "vergion", are ignored.
 
 
 The main objective is to infer the singer from lyrics of a song.
@@ -39,16 +42,52 @@ detecting improper mimicking of the lyrics among singers,
 \subsection{b) Overview of input texts and labels}
 summary of the labels and input text to be used \\
 
-There are ten labels and each label is a name of a singer.
+There are ten labels and each label is a name of a singer, which is to be predicted.
 Singers are: "Ariana Grande", "Michael Jackson","Taylor Swift","XXXTentacion","Eminem", "Lady Gaga","Selena Gomez","Beyonce Knowles","Dua Lipa",'Jennifer Lopez.'
 This dataset is not multi-label and does not consider a song from more than 2 singers.
+Preprocessing of labels were unnecessary because texts were collected from a label.
+
+
 Input texts are a title of a song and its lyrics concatenated with a new line character.
-
-
+There are 1784 documents in total, 
+and the length of input texts varies from 305 characters to 13102 characters.
+The distribution of the length of text is shown in Figure 1.
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=70mm]{figures/text_length.png}
+  \caption{distribution of text length}
+  \end{center}
+\end{figure}
 
 
 
 \subsection{c) spliting data}
+The dataset is not split into a training, validation, and test set at first, 
+so it was split into 60/20/20\% using "train\_test\_split" of scikit-learn.
+The label counts for each split dataset is shown in Figure 2.
+All labels have 100 to 200 documents in total and are not too imbalanced.
+
+
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=140mm]{figures/text_labels2.png}
+  \caption{label counts for each split}
+  \end{center}
+\end{figure}
+
+% \begin{table}[htbp]
+%   \centering
+%   \begin{tabular}{l|c|r}
+%     1 & 2 & 3 \\ \hline\hline
+%     sin & cos & tan \\
+%     apple & pine & banana \\ \hline
+%   \end{tabular}
+%   \caption{fugafuga}
+%   \label{tb:fugafuga}
+% \end{table}
+
+
 \subsection{steps to build the dataset}
 
 \section{Q2- Clustering}
