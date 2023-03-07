@@ -7,7 +7,8 @@
 \usepackage{here}
 % 画像
 \usepackage[dvipdfmx]{graphicx}
-
+% hyperlink
+\usepackage{hyperref}
 
 
 \begin{document}
@@ -19,12 +20,33 @@
 
 \section{Q1- Dataset}
 \subsection{a) Overview of data}% 数式
-- what is my dataset  \\
-- why did i select it  \\
-- how might automatic classification/labelling be used in practice \\
+The dataset used in this experiment is the lyrics of songs of famous singers.
+Singers are chosen from a ranking in a website, \href{https://www.thefamouspeople.com/21st-century-singers.php}{"The greatest 21st century singers"}, to minimise the arbitrary choice of the author.
+
+Lyrics were obtained by using lyricsgenius, a python API of Genius.com.
+Since lyrics were fetched online, it includes some HTML tokens and some meta data about translation inside the lyrics.
+The meta data about translation are supposed to be removed by preprocessing.
+
+
+The main objective is to infer the singer from lyrics of a song.
+I chose this dataset because I wanted to examine whether lyrics reflect singers' characteristics like the musical elements does.
+
+Automatic classification have several applications.
+It can be used for helping singers maintain the same trend among an album,
+suggesting new singers for music listeners in recommendation system of music service like Spotify, 
+detecting improper mimicking of the lyrics among singers, 
 
 \subsection{b) Overview of input texts and labels}
 summary of the labels and input text to be used \\
+
+There are ten labels and each label is a name of a singer.
+Singers are: "Ariana Grande", "Michael Jackson","Taylor Swift","XXXTentacion","Eminem", "Lady Gaga","Selena Gomez","Beyonce Knowles","Dua Lipa",'Jennifer Lopez.'
+This dataset is not multi-label and does not consider a song from more than 2 singers.
+Input texts are a title of a song and its lyrics concatenated with a new line character.
+
+
+
+
 
 \subsection{c) spliting data}
 \subsection{steps to build the dataset}
