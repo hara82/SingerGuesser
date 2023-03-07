@@ -32,12 +32,12 @@ To minimise the duplication of a same song, songs including certain keywords,suc
 
 
 The main objective is to infer the singer from lyrics of a song.
-I chose this dataset because I wanted to examine whether lyrics reflect singers' characteristics like the musical elements does.
+I chose this dataset because I wanted to examine whether lyrics reflect singers' characteristics like the musical elements do.
 
-Automatic classification have several applications.
+Automatic classification has several applications.
 It can be used for helping singers maintain the same trend among an album,
 suggesting new singers for music listeners in recommendation system of music service like Spotify, 
-detecting improper mimicking of the lyrics among singers, 
+detecting improper mimicking of the lyrics among singers. 
 
 \subsection{b) Overview of input texts and labels}
 summary of the labels and input text to be used \\
@@ -88,10 +88,32 @@ All labels have 100 to 200 documents in total and are not too imbalanced.
 % \end{table}
 
 
-\subsection{steps to build the dataset}
+% \subsection{steps to build the dataset}
 
 \section{Q2- Clustering}
-\subsection{a) k=5 clusters}
+\subsection{Vectorizing texts}
+Firstly, texts were converted into vectors to conduct clustering.
+TfidfVectorizer from scikit-learn, along with 'en\_core\_web\_sm' from spacy were used.
+
+Before converted to vectors, texts were firstly tokenized, and also stop words were removed.
+Stop words were defined by the spacy models and manually added words, which are mainly interjections as "oh", "ah."
+Such manually added words were chosen so that they do not show in the top 5 tokens of each cluster.
+Stop words were removed because they do not convey much meaning and prevent understanding the characteristics of each cluster.
+
+As for input, a title and lyrics of a song combined was used for an input because a title tend to be too short.
+
+
+\subsection{a) Documents assigned to each cluster}
+K-mean clustering was conducted with k=5.
+The first 200 characters of 3 documents in each cluster are shown below.
+% texts
+
+Besides, the top 5 tokens with highest magnitude in each centroid is listed below.
+% tokens
+
+
+
+
 \subsection{b) Examining clusters}
 \subsection{c) Confusion matrix}
 \subsection{d) Examining the confusion matrix}
