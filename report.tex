@@ -358,8 +358,8 @@ Therefore, removing stopwords and punctuations and lowercasing are also effectiv
 \section{Q4- Parameter Tuning}
 \subsection{Classifier}
 First, Regularisation C value are tuned, and the results are shown in Table 5.
-It is shown $C=10$ is the best parameter, and the metrics gradually decreases as C increases beyond C=10.
-That means weak regularisation worked well. This might be
+It is shown $C=10$ is the best parameter.%, and the metrics gradually decreases as C increases beyond C=10.
+% That means weak regularisation worked well. 
 
 \begin{table}[htbp]
     \centering
@@ -415,6 +415,21 @@ and simpler models might work well on validation dataset.
 Therefore, penalty term was tuned.
 To be able to use l1 penalty term, solver was changed from 'lbfgs' to 'saga'
 
+\subsection{Interpretation of parameter choice}
+As for Regularisation C of Logistic Regression, larger C tends to return better results.
+Thus, a model with more freedom was appropriate.
+
+As to Vectorizer, max\_features needed to be large enough as expected easily because too few tokens cannot distinguish separate documents.
+sublinear\_tf = True, which means taking the logarithm of tf brought better result.
+This might result from the characteristics of lyrics where same words and phrases are prune to used highly repeatedly.
+
+As for Penalty term, l2 penalty, which returns more dense model than l1 penalty resulted in a better result.
+Combined with the discussion of C, the more complex model result in the better result.
+This might be because the distinction of each document is subtle as in Section 2 most documents are classified into either of 2 labels.
+Therefore, complex model that is sensitive to tiny difference might be necessary.
+
+
+
 
 \begin{table}[htbp]
     \centering
@@ -423,6 +438,11 @@ To be able to use l1 penalty term, solver was changed from 'lbfgs' to 'saga'
     \scalebox{0.8}[0.8]{
     \begin{tabular}{l|cccc}
         Penalty Term & Accuracy & Precision & Recall & F1 \\ \hline 
+        none & 0.552 & 0.560 & 0.554 & 0.549 \\ 
+        l1 & 0.499 & 0.496 & 0.503 & 0.492 \\
+        \rowcolor[rgb]{0.9,0.9,0}l2 & 0.577 & 0.589 & 0.575 & 0.567 \\
+        elasticnet(ratio=0.5) & 0.535 & 0.557 & 0.537 & 0.531 \\
+
 
 
     \end{tabular}
