@@ -305,14 +305,25 @@ As shown in Table 3, the best-performing classifier by macro F1 on validation se
 A bar chart graph for F1 score for each class by this classifier is shown in Figure 4.
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=100mm]{figures/confusion_mat.png}
+  \includegraphics[width=100mm]{figures/F1score.png}
   \caption{F1 Score for Each Class by Logistic Regression(One-hot)}
   \end{center}
 \end{figure}
 
+The performance of dummy classifiers were low as F1 score were below 0.100,
+whereas the F1 scores of the other 3 classifiers were above 0.4 on validation set,
+and above 0.85 on training set.
+This shows non-dummy classifiers overfit to Training set because of the gap between training and validation set.
+
+Since each labels are almost equally distributed, the performance difference among labels can be attributed to the characteristics of texts.
+Logistic Regression(One-hot) classifiers worked well on 'XXXTentacion', 'Eminem', and 'Taylor Swift'.
+The low F1 score of 'Selena Gomez' might result from the fewer number of texts labelled.
+
+Apart from determining the random state and augmenting maximum iteration, the default parameters of scikit-learn classifiers were used.
 
 
 \subsection{b) My chosen classifier}
+
 
 \section{Q4- Parameter Tuning}
 \subsection{Classifier}
