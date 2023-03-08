@@ -358,7 +358,8 @@ Therefore, removing stopwords and punctuations and lowercasing are also effectiv
 \section{Q4- Parameter Tuning}
 \subsection{Classifier}
 First, Regularisation C value are tuned, and the results are shown in Table 5.
-It is shown $C=10$ is the best parameter.
+It is shown $C=10$ is the best parameter, and the metrics gradually decreases as C increases beyond C=10.
+That means weak regularisation worked well. This might be
 
 \begin{table}[htbp]
     \centering
@@ -383,6 +384,7 @@ It is shown $C=10$ is the best parameter.
 \subsection{Vectorizer}
 Parameters of vectorizer,that are sublenear\_tf and max\_features, are tuned here.
 Regularisation C is sticked to 10 based on the previous result.
+max\_features=5000, sublinear\_tf = True is the best combination.
 
 \begin{table}[htbp]
     \centering
@@ -390,14 +392,29 @@ Regularisation C is sticked to 10 based on the previous result.
     \small
     \scalebox{0.8}[0.8]{
     \begin{tabular}{l|l|cccc}
-        sublinear\_tf& max\_features  & Accuracy & Precision & Recall & F1 \\ \hline 
-
-
+        max\_features & sublinear\_tf & Accuracy & Precision & Recall & F1 \\ \hline 
+        None&True&0.571&0.584&0.565&0.554 \\
+        None&False&0.485&0.489&0.484&0.479\\
+        5&True&0.196&0.124&0.203&0.147\\
+        5&False&0.196&0.124&0.205&0.143\\
+        50&True&0.412&0.415&0.423&0.407\\
+        50&False&0.367&0.366&0.369&0.358\\
+        500&True&0.499&0.504&0.501&0.495\\
+        500&False&0.415&0.418&0.422&0.414\\
+        \rowcolor[rgb]{0.9,0.9,0}5000&True&0.577&0.589&0.575&0.567\\
+        5000&False&0.473&0.470&0.473&0.465\\
+        50000&True&0.571&0.584&0.565&0.554\\
+        50000&False&0.485&0.489&0.484&0.479\\
     \end{tabular}
-
     }
 \end{table}
 \subsection{Penalty Term}
+Penalty Term of the Logistic Regression was changed from 'none', 'l1','l2','elasticnet'.
+Since Table 3 suggests overfitting of a model, using different penalty term may result in more simple/complex models,
+and simpler models might work well on validation dataset. 
+Therefore, penalty term was tuned.
+To be able to use l1 penalty term, solver was changed from 'lbfgs' to 'saga'
+
 
 \begin{table}[htbp]
     \centering
