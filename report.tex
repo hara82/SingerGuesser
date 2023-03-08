@@ -10,6 +10,7 @@
 % hyperlink
 \usepackage{hyperref}
 
+\usepackage{multirow}
 
 \begin{document}
 
@@ -105,17 +106,152 @@ As for input, a title and lyrics of a song combined was used for an input becaus
 
 \subsection{a) Documents assigned to each cluster}
 K-mean clustering was conducted with k=5.
-The first 200 characters of 3 documents in each cluster are shown below.
-% texts
+The first 120 characters of 2 documents in each cluster are shown below.
+Newline characters are sometimes substituted with period(.) to shorten the table.
 
-Besides, the top 5 tokens with highest magnitude in each centroid is listed below.
-% tokens
+\begin{table}[htb]
+
+\begin{center}
+\caption{2 documents in each cluster}
+
+\small
+\begin{tabular}{|c|c|} \hline
+
+  Label & Text \\ \hline \hline
+
+    0&
+    \begin{tabular}{l}
+      
+    Moonlight. 
+    Lyrics. \\
+    The sun is setting and you're right here by my side \\
+    And the movie is playing, but we won't be watching \\
+    \end{tabular}\\ \hline
+
+    0&
+    \begin{tabular}{l}
+      
+    Shady XV.
+    Shady XV Lyrics.\\
+    I'm liable to start a violent spark with a silent thought \\
+    I disgust you like dialogue from The  \\ 
+    \end{tabular}\\ \hline
+
+    1&
+    \begin{tabular}{l}
+  Don't Walk Away. 
+  Don't Walk Away Lyrics. \\
+  Ooh, don't walk away.
+  Walk away.
+  Don't walk away.\\
+  See, I just can't find the right  \\
+    \end{tabular}\\ \hline
+
+    1&
+    \begin{tabular}{l}
+  On the Floor (Mixin Marc \& Tony Svejda L.A. to Ibiza Mix) \\
+  On the Floor (Mixin Marc \& Tony Svejda L.A. to Ibiza Mix) Lyri 
+    \end{tabular}\\ \hline
+  
+    2&
+    \begin{tabular}{l}
+    INUYASHA.
+    Lyrics.\\
+    Damn, baby, what's your fucking name? god damn (Murder)\\
+    Goddamn, goddamn.
+    100 hoes.
+    BitBoy Beats.
+    Acid, aci
+    \end{tabular}\\ \hline
 
 
+    2&
+    \begin{tabular}{l}
+    rare.
+    Lyrics.\\
+    Very fucking holy, very fucking rare \\
+    Even in broad daylight, I have this dream, I have this fantasy \\
+    Marvelo
+    \end{tabular}\\ \hline
+
+
+    3&
+    \begin{tabular}{l}
+Perfect Illusion.
+Perfect Illusion Lyrics.\\
+Tryin' to get control.
+Pressure's takin' its toll \\
+Stuck in the middle zone.
+I jus
+    \end{tabular}\\ \hline
+
+
+    3&
+    \begin{tabular}{l}
+Freakshow.
+Freakshow Lyrics.\\
+'Cause I guarantee you've never seen a show like this before\\
+Gonna show you something that yo
+    \end{tabular}\\ \hline
+
+    
+    4&
+    \begin{tabular}{l}
+Scheiße (DJ White Shadow Mugler)\\
+Scheiße (DJ White Shadow Mugler) Lyrics\\
+I don't speak German, but I can if you like, ow
+    \end{tabular}\\ \hline
+    4&
+    \begin{tabular}{l}
+The Manifesto of Chromatica\\
+The Manifesto of Chromatica Lyrics\\
+When I was younger, I was at some point, born.
+I grew in 
+    \end{tabular}\\ \hline
+    
+    
+    
+    
+  \end{tabular}
+
+\end{center}
+
+\end{table}
+
+ 
+Besides, the top 5 tokens with highest magnitude in each centroid is listed below.  
+
+
+\begin{table}[htb]
+
+  \begin{center}
+  \caption{top 5 tokens in each centroid}
+
+  \begin{tabular}{|c|c|} 
+    label & tokens\\ \hline \hline
+    0 & know, feel, like, fuck, let \\ \hline
+    1 & stay, bitch, away, work, walk\\ \hline
+    2 & animal, jump, damn, glad, effect\\ \hline
+    3 & want, know, love, like, baby\\ \hline
+    4 & like, people, world, woman, million\\ \hline
+  \end{tabular}
+  \end{center}
+\end{table}
 
 
 \subsection{b) Examining clusters}
+There are no easily recognisable distinct characteristics in each cluster shown in Table 1 and 2.
+For example in Table 2, the token 'like' appeared in 3 clusters, and 'know' in 2.
+As for topics, no significant difference among clusters.
 \subsection{c) Confusion matrix}
+In Figure 2, a confusion matrix between 5 clusters and target labels is shown.
+
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=100mm]{figures/confusion_mat.png}
+  \caption{confusion matrix}
+  \end{center}
+\end{figure}
 \subsection{d) Examining the confusion matrix}
 
 
