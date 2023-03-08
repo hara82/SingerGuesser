@@ -7,10 +7,13 @@
 \usepackage{here}
 % 画像
 \usepackage[dvipdfmx]{graphicx}
+\usepackage[dvipdfmx]{color}
 % hyperlink
 \usepackage{hyperref}
 
 \usepackage{multirow}
+\usepackage{colortbl}
+
 
 \begin{document}
 
@@ -273,6 +276,42 @@ This difference is, however, not significant at all.
 
 \section{Q3- Comparing Classifiers}
 \subsection{a) 5 baseline classifiers}
+The five baseline classifiers indicated in the course specification were implemented.
+The performance of them are shown in Table 3.
+The highest performance is highlighted in yellow.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Comparison of Metrics for 5 Classifiers}
+    \label{tab:classifier_metrics}
+    \small
+    \scalebox{0.8}[0.8]{
+    \begin{tabular}{l|cccc|cccc}
+        \hline
+        \textbf{Classifier} & \multicolumn{4}{c|}{\textbf{Validation Metrics}} & \multicolumn{4}{c}{\textbf{Training Metrics}} \\
+        & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} \\
+        \hline
+        Dummy Classifier (most\_frequent) & {0.084} & 0.008 & 0.100 & 0.016 & 0.127 & 0.013 & 0.100 & 0.023 \\
+        Dummy Classifier (stratified) & 0.106 & 0.101 & 0.101 & 0.100 & 0.095 & 0.090 & 0.090 & 0.090 \\
+        \rowcolor[rgb]{0.9,0.9,0}Logistic Regression (one-hot) & \colorbox[rgb]{0.9, 0.9, 0}{0.563} & \colorbox[rgb]{0.9, 0.9, 0}{0.565} & \colorbox[rgb]{0.9, 0.9, 0}{0.567} & \colorbox[rgb]{0.9, 0.9, 0}{0.556} & 1.000 & 1.000 & 1.000 & 1.000 \\
+        Logistic Regression (TF-IDF) & 0.451 & 0.424 & 0.444 & 0.413 & 0.895 & 0.906 & 0.867 & 0.874 \\
+        SVC (one-hot) & 0.518 & 0.498 & 0.514 & 0.481 & 0.936 & 0.943 & 0.912 & 0.919 \\
+        \hline
+    \end{tabular}
+    }
+\end{table}
+
+As shown in Table 3, the best-performing classifier by macro F1 on validation set is Logistic Regression with One-hot vectorization.
+A bar chart graph for F1 score for each class by this classifier is shown in Figure 4.
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=100mm]{figures/confusion_mat.png}
+  \caption{F1 Score for Each Class by Logistic Regression(One-hot)}
+  \end{center}
+\end{figure}
+
+
+
 \subsection{b) My chosen classifier}
 
 \section{Q4- Parameter Tuning}
