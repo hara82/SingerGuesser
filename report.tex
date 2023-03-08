@@ -323,6 +323,36 @@ Apart from determining the random state and augmenting maximum iteration, the de
 
 
 \subsection{b) My chosen classifier}
+I chose a different preprocessing for Tf-Idf vectorizer for a new classifier, where stop words and punctuation are not removed and Capital letters are not lowercased.
+Stop words are not removed because the frequency and variation of such words might differ from a song to song, and also simple words tend to be used in a song.
+Punctuations are not removed because certain singers may use hyphenated words often, such as "P-p-p-poker" in "Poker Face" by Lady Gaga. 
+Also, Capital letters can capture the words with which a phrase start, so they are not removed.
+
+Logistic Regression was used to compare the result with the previous result.
+The result is shown in Table 4.
+It is better than the 2 dummy clussifers, but worse than any of the 3 other classifiers in all the metrics.
+Therefore, removing stopwords and punctuations and lowercasing are also effective in the case for lyrics.
+
+
+\begin{table}[htbp]
+    \centering
+    \caption{Metrics for classifier without stop-words removal}
+    \small
+    \scalebox{0.8}[0.8]{
+    \begin{tabular}{l|cccc|cccc}
+        \hline
+        \textbf{Classifier} & \multicolumn{4}{c|}{\textbf{Validation Metrics}} & \multicolumn{4}{c}{\textbf{Training Metrics}} \\
+        & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} \\
+        \hline 
+        Logistic Regression &&&&&& \\ (TF-IDF with stop words) & 0.443 & 0.413 & 0.437 & 0.403 & 0.839 & 0.854 & 0.805 & 0.812 \\
+        \hline
+    \end{tabular}
+    }
+\end{table}
+
+
+
+
 
 
 \section{Q4- Parameter Tuning}
