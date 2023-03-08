@@ -357,9 +357,61 @@ Therefore, removing stopwords and punctuations and lowercasing are also effectiv
 
 \section{Q4- Parameter Tuning}
 \subsection{Classifier}
-\subsection{Vectorizer}
-\subsection{My own parameter}
+First, Regularisation C value are tuned, and the results are shown in Table 5.
+It is shown $C=10$ is the best parameter.
 
+\begin{table}[htbp]
+    \centering
+    \caption{Performance with Different Regularisation C Value}
+    \small
+    \scalebox{0.8}[0.8]{
+    \begin{tabular}{l|cccc}
+        C value & Accuracy & Precision & Recall & F1 \\ \hline 
+        $10^{-3}$ &0.084 & 0.008& 0.100& 0.016\\ 
+        $10^{-2}$ &0.084 &0.008 &0.100 &0.016\\ 
+        $10^{-1}$ &0.263 &0.346 &0.269 &0.233\\ 
+        $10^{0}$  &0.457 &0.434 &0.451 &0.421\\ 
+        \rowcolor[rgb]{0.9,0.9,0}$10^{1}$  &0.485 &0.489 &0.484 &0.479\\ 
+        $10^{2}$  &0.473 &0.469 &0.472 &0.466\\ 
+        $10^{3}$  &0.468 &0.460 &0.467 &0.461\\ 
+        $10^{4}$  &0.462 &0.455 &0.463 &0.456\\ 
+        $10^{5}$  &0.462 &0.455 &0.462 &0.455\\ 
+
+    \end{tabular}
+    }
+\end{table}
+\subsection{Vectorizer}
+Parameters of vectorizer,that are sublenear\_tf and max\_features, are tuned here.
+Regularisation C is sticked to 10 based on the previous result.
+
+\begin{table}[htbp]
+    \centering
+    \caption{Performance with Different Vectorizer Parameter}
+    \small
+    \scalebox{0.8}[0.8]{
+    \begin{tabular}{l|l|cccc}
+        sublinear\_tf& max\_features  & Accuracy & Precision & Recall & F1 \\ \hline 
+
+
+    \end{tabular}
+
+    }
+\end{table}
+\subsection{Penalty Term}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Performance with Different Penalty Term}
+    \small
+    \scalebox{0.8}[0.8]{
+    \begin{tabular}{l|cccc}
+        Penalty Term & Accuracy & Precision & Recall & F1 \\ \hline 
+
+
+    \end{tabular}
+
+    }
+\end{table}
 
 \section{Context vectors using BERT}
 \subsection{feature extraction and logistic regression}
