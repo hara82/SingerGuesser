@@ -451,8 +451,60 @@ Therefore, complex model that is sensitive to tiny difference might be necessary
 \end{table}
 
 \section{Context vectors using BERT}
+
 \subsection{feature extraction and logistic regression}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Metrics of Logistic Regression using [CLS] Token}
+    \small
+    \scalebox{0.8}[0.8]{
+    \begin{tabular}{l|cccc}
+         Approach & Accuracy & Precision & Recall & F1 \\ \hline 
+         Logistic Regression & 0.524 & 0.476 & 0.517 & 0.485 \\ 
+        %  end-to-end Classifier (b) & 0.213 & 0.221 &0.207 & 0.118 \\
+        %  param(a) & 0.084 & 0.008 & 0.100 & 0.016 \\
+        %  param(c)
+        % none & 0.552 & 0.560 & 0.554 & 0.549 \\ 
+        % l1 & 0.499 & 0.496 & 0.503 & 0.492 \\
+        % \rowcolor[rgb]{0.9,0.9,0}l2 & 0.577 & 0.589 & 0.575 & 0.567 \\
+        % elasticnet(ratio=0.5) & 0.535 & 0.557 & 0.537 & 0.531 \\
+
+
+
+    \end{tabular}
+
+    }
+\end{table}
 \subsection{end-to-end trained classifier}
+
+\begin{table}[htbp]
+%     \centering
+    \caption{DL param}
+    \small
+    \scalebox{0.8}[0.8]{
+    \begin{tabular}{l|lll|cccc}
+         Approach & Learning\_rate & Epochs & Batch\_size & Accuracy & Precision & Recall & F1 \\ \hline 
+        %  Logistic Regression & 0.524 & 0.476 & 0.517 & 0.485 \\ 
+         end-to-end Classifier (b) & 1e-4& 1 & 16 & 0.213 & 0.221 &0.207 & 0.118 \\
+         param(a)                  & 1e-3& 10& 4  & 0.084 & 0.008 & 0.100 & 0.016 \\
+         param(b)                  & 1e-5& 50& 16 & 0.594 & 0.598 & 0.595 & 0.586 \\
+         param(c)                  & 1e-4& 25& 8  & 0. & 0. & 0.  & 0. \\ \hline
+         param(d)                  & 1e-5& 50& 8  & 0. & 0. & 0.  & 0. \\
+         param(e)                  & 1e-5& 100& 16  & 0. & 0. & 0.  & 0. \\
+%         %  param(c)
+%         % none & 0.552 & 0.560 & 0.554 & 0.549 \\ 
+%         % l1 & 0.499 & 0.496 & 0.503 & 0.492 \\
+%         % \rowcolor[rgb]{0.9,0.9,0}l2 & 0.577 & 0.589 & 0.575 & 0.567 \\
+%         % elasticnet(ratio=0.5) & 0.535 & 0.557 & 0.537 & 0.531 \\
+
+
+
+    \end{tabular}
+
+    }
+\end{table}
+
 \subsection{Selecting hyperparameters and models}
 \subsection{Examining models and parameters}
 
