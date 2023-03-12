@@ -251,7 +251,7 @@ In Figure 3, a confusion matrix between 5 clusters and target labels is shown.
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=100mm]{figures/confusion_mat.png}
+  \includegraphics[width=100mm]{figures/confusion_mat2.png}
   \caption{confusion matrix}
   \end{center}
 \end{figure}
@@ -292,10 +292,10 @@ The highest performance is highlighted in yellow.
         & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} & \textbf{Accuracy} & \textbf{Precision} & \textbf{Recall} & \textbf{F1} \\
         \hline
         Dummy Classifier (most\_frequent) & {0.084} & 0.008 & 0.100 & 0.016 & 0.127 & 0.013 & 0.100 & 0.023 \\
-        Dummy Classifier (stratified) & 0.106 & 0.101 & 0.101 & 0.100 & 0.095 & 0.090 & 0.090 & 0.090 \\
-        \rowcolor[rgb]{0.9,0.9,0}Logistic Regression (one-hot) & \colorbox[rgb]{0.9, 0.9, 0}{0.563} & \colorbox[rgb]{0.9, 0.9, 0}{0.565} & \colorbox[rgb]{0.9, 0.9, 0}{0.567} & \colorbox[rgb]{0.9, 0.9, 0}{0.556} & 1.000 & 1.000 & 1.000 & 1.000 \\
-        Logistic Regression (TF-IDF) & 0.451 & 0.424 & 0.444 & 0.413 & 0.895 & 0.906 & 0.867 & 0.874 \\
-        SVC (one-hot) & 0.518 & 0.498 & 0.514 & 0.481 & 0.936 & 0.943 & 0.912 & 0.919 \\
+        Dummy Classifier (stratified) & 0.101 & 0.099 & 0.096 & 0.096 & 0.089 & 0.087 & 0.086 & 0.086 \\
+        \rowcolor[rgb]{0.9,0.9,0}Logistic Regression (one-hot) & \colorbox[rgb]{0.9, 0.9, 0}{0.560} & \colorbox[rgb]{0.9, 0.9, 0}{0.563} & \colorbox[rgb]{0.9, 0.9, 0}{0.564} & \colorbox[rgb]{0.9, 0.9, 0}{0.554} & 1.000 & 1.000 & 1.000 & 1.000 \\
+        Logistic Regression (TF-IDF) & 0.457 & 0.434 & 0.451 & 0.421 & 0.921 & 0.931 & 0.895 & 0.902 \\
+        SVC (one-hot) & 0.499 & 0.493 & 0.496 & 0.466 & 0.927 & 0.940 & 0.902 & 0.910 \\
         \hline
     \end{tabular}
     }
@@ -543,19 +543,27 @@ The confusion matrix is shown in Figure 5.
   \end{center}
 \end{figure}
 
+\subsection{manually examining the result}
+
+
 \subsection{Discussion on performance}
-The final performance of metrics were around 0.6
+(C)
+% The final performance of metrics were around 0.6.
+% Precision was higher than recall, and so it can be interpreted the model does not cover the whole characteristics of a singer,
+% but succeeded in capture the core feature of a singer.(あやしい)
+% Especially for "Eminem", metrics are so high that recall is 33/34, and  precision is 33/38 and succeeded in classification. 
+
 % confusion matの傾向が高い場合: (aをbとまちがえやすいだけ)
-% Since confusion matrix shows mistakes occured mainly with similar singers, it is successful in 
-% detecting singer characteristics. Therefore, the performance is high enough for singers to maintain their trend,
-% or for recommendation system of music service.
+Since confusion matrix shows mistakes occured mainly with similar singers, it is successful in 
+detecting singer characteristics. 
+In order for singers to maintain their tren,or for recommendation system of music service.
 
 % confusion matの傾向がない場合: (ランダムに間違える)
 % Confusion matrix shows mistakes occured randomly, and thus the model fails to detect singer characteristics
 % for about 40 percent. This performance is not high enough for singers to maintain their trend, so further
 % improvements are needed.
-% However, for recommendation system of music service, where people are likely to be more generous to errornous recommendation,
-% this performance is high enough as it can show a song that fits a trend more frequently than a song that does not.
+However, for recommendation system of music service, where people are likely to be more generous to errornous recommendation,
+this performance is high enough as it can show a song that fits a trend more frequently than a song that does not.
 
 (D)
 As for possible negative social effects of deployment, people might start to write a songs that 
