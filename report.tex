@@ -544,6 +544,67 @@ The confusion matrix is shown in Figure 5.
 \end{figure}
 
 \subsection{manually examining the result}
+(B)
+Considering the confusion matrix, Dua Lipa has higher False Positive.
+Also, more than half of False Negative for Lady Gaga is Dua lipa.
+Therefore, misclassification of Lady Gaga into Dua Lipa and Flase Positive for Dua Lipa are considered.
+
+
+First, the write of a song is checked for the first case, as it can be possible those songs are written by Dua Lipa.
+However, those songs are actually written from Lady Gaga, while in some songs, several writers wrote them.
+
+Next, it is hypothesized that lyrics are similar to Dua Lipa.
+This was examined by taking the average document similarity with Jaccard Similarity
+of every pair of misclassified songs and correctly classified songs.
+
+Here, I write songs that are from "Lady Gaga" but classified as "Dua Lipa" as "Gaga\_Dua".
+This means False Positive for "Dua lipa" and False Negative for "Lady Gaga".
+
+The result showed that False Positives of Dua Lipa had higher Jaccard Similarity than 
+true labels for each one as shown in Table (???).
+This might explain the wrong classification, although this document similarity is not trustworthy enough.
+Since True Positives have small similarities with themselves.
+
+\begin{table}[htbp]
+\centering
+\caption{Accuracy Values}
+\begin{tabular}{|c|l|c|}
+\hline
+\textbf{Intention} & \textbf{Pairs} & \textbf{Accuracy} \\ \hline
+\multirow{5}{*}{False Negatives with True Labels} & Gaga\_Dua vs Gaga\_Gaga & 0.174 \\
+& Taylor\_Dua vs Taylor\_Taylor & 0.209 \\
+& Ariana\_Dua vs Ariana\_Ariana & 0.199 \\
+& Selena\_Dua vs Selena\_Selena & 0.154 \\
+& Jennifer\_Dua vs Jennifer\_Jennifer & 0.188 \\
+\hline
+\multirow{5}{*}{False Positives of Dua Lipa} & Gaga\_Dua vs Dua\_Dua & 0.205 \\
+& Taylor\_Dua vs Dua\_Dua & 0.203 \\
+& Ariana\_Dua vs Dua\_Dua & 0.206 \\
+& Selena\_Dua vs Dua\_Dua & 0.194 \\
+& Jennifer\_Dua vs Dua\_Dua & 0.208 \\
+\hline
+\multirow{7}{*}{True Positives against themselves} & Dua\_Dua vs Dua\_Dua & 0.196 \\
+& Gaga\_Gaga vs Gaga\_Gaga & 0.158 \\
+& Taylor\_Taylor vs Taylor\_Taylor & 0.207 \\
+& Ariana\_Ariana vs Ariana\_Ariana & 0.179 \\
+& Selena\_Selena vs Selena\_Selena & 0.116 \\
+& Jennifer\_Jennifer vs Jennifer\_Jennifer & 0.164 \\
+& XXX\_XXX vs XXX\_XXX & 0.128 \\
+\hline
+\multirow{5}{*}{True Positives against other True Positives} & Gaga\_Gaga vs Dua\_Dua & 0.164 \\
+& Taylor\_Taylor vs Dua\_Dua & 0.195 \\
+& Ariana\_Ariana vs Dua\_Dua & 0.183 \\
+& Selena\_Selena vs Dua\_Dua & 0.148 \\
+& Jennifer\_Jennifer vs Dua\_Dua & 0.169 \\
+\hline
+\end{tabular}
+\label{tab:accuracy}
+\end{table}
+
+
+
+
+
 
 
 \subsection{Discussion on performance}
