@@ -462,25 +462,30 @@ Therefore, complex model that is sensitive to tiny difference might be necessary
     \begin{tabular}{l|cccc}
          Approach & Accuracy & Precision & Recall & F1 \\ \hline 
          Logistic Regression & 0.524 & 0.476 & 0.517 & 0.485 \\ 
-        %  end-to-end Classifier (b) & 0.213 & 0.221 &0.207 & 0.118 \\
-        %  param(a) & 0.084 & 0.008 & 0.100 & 0.016 \\
-        %  param(c)
-        % none & 0.552 & 0.560 & 0.554 & 0.549 \\ 
-        % l1 & 0.499 & 0.496 & 0.503 & 0.492 \\
-        % \rowcolor[rgb]{0.9,0.9,0}l2 & 0.577 & 0.589 & 0.575 & 0.567 \\
-        % elasticnet(ratio=0.5) & 0.535 & 0.557 & 0.537 & 0.531 \\
-
-
 
     \end{tabular}
 
     }
 \end{table}
 \subsection{end-to-end trained classifier}
+An end-to-end classifier was implemented and evaluated.
+After that, hyper parameters were tuned and evaluated.
+The result is shown  in Table 9.
+parameter(a) was selected so that the model be sensitive to each data 
+by decreasing batch\_size and increasing learning rate.
+parameter(b) was selected so that the model be less sensitive to each data
+with large batch\_size and small learning\_rate. Epochs were increased to help model to converge.
+The maximum size of batch\_size was 16 due to memory problem.
+parameter(c) was chosen to be the middle of parameter(a) and parameter(b).
+
+Experiment showed parameter(b) yields higher scores than others, and therefore
+parameter(d) and parameter(e), which are slightly modified from parameter(b) was chosen and tested.
+
+
 
 \begin{table}[htbp]
 %     \centering
-    \caption{DL param}
+    \caption{Metrics of End-to-End Classifier with Different Hyperparameters}
     \small
     \scalebox{0.8}[0.8]{
     \begin{tabular}{l|lll|cccc}
@@ -489,8 +494,8 @@ Therefore, complex model that is sensitive to tiny difference might be necessary
          end-to-end Classifier (b) & 1e-4& 1 & 16 & 0.213 & 0.221 &0.207 & 0.118 \\
          param(a)                  & 1e-3& 10& 4  & 0.084 & 0.008 & 0.100 & 0.016 \\
          param(b)                  & 1e-5& 50& 16 & 0.594 & 0.598 & 0.595 & 0.586 \\
-         param(c)                  & 1e-4& 25& 8  & 0. & 0. & 0.  & 0. \\ \hline
-         param(d)                  & 1e-5& 50& 8  & 0. & 0. & 0.  & 0. \\
+         param(c)                  & 1e-4& 25& 8  & 0.084 & 0.008 & 0.100 & 0.016 \\ \hline
+         param(d)                  & 1e-5& 50& 8  & 0.605 & 0.608 & 0.608 & 0.601 \\
          param(e)                  & 1e-5& 100& 16  & 0. & 0. & 0.  & 0. \\
 %         %  param(c)
 %         % none & 0.552 & 0.560 & 0.554 & 0.549 \\ 
@@ -505,11 +510,39 @@ Therefore, complex model that is sensitive to tiny difference might be necessary
     }
 \end{table}
 
-\subsection{Selecting hyperparameters and models}
+% \subsection{Selecting hyperparameters and models}
 \subsection{Examining models and parameters}
+It turned out that end-to-end model performed better than using context vectors from the pipeline approach.
+While context vectors approach only uses [CLS] token that has altered by the accompanied words,
+end-to-end approach makes use of the whole text.
+Besides, context vectors are generated from a frozen model which is not specialised in this setting,
+whereas in end-to-end approach, models are retrained and likely to be more task-specific.
 
 
 \section{Q6- Conclusions and Future Work}
+The performance on test set of end-to-end model with parameter (???) is given below.
+\begin{table}[htbp]
+%     \centering
+    \caption{Metrics of End-to-End Classifier with Different Hyperparameters}
+    \small
+    \scalebox{0.8}[0.8]{
+    \begin{tabular}{l|lll|cccc}
+         Approach & Learning\_rate & Epochs & Batch\_size & Accuracy & Precision & Recall & F1 \\ \hline 
+         param(d)                  & 1e-5& 50& 8  & 0.605 & 0.608 & 0.608 & 0.601 \\
+         param(e)                  & 1e-5& 100& 16  & 0. & 0. & 0.  & 0. \\
+    \end{tabular}
+    }
+\end{table}
+
+The confusion matrix is shown in Figure 5.
+\begin{figure}[htbp]
+  \begin{center}
+  \includegraphics[width=100mm]{figures/confusion_mat.png}
+  \caption{confusion matrix}
+  \end{center}
+\end{figure}
+
+
 
 
 
