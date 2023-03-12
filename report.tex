@@ -483,6 +483,10 @@ parameter(d) and parameter(e), which are slightly modified from parameter(b) was
 
 
 
+%%%%やばい
+It turned out that parameter(e) yield the best results.
+
+
 \begin{table}[htbp]
 %     \centering
     \caption{Metrics of End-to-End Classifier with Different Hyperparameters}
@@ -493,16 +497,13 @@ parameter(d) and parameter(e), which are slightly modified from parameter(b) was
         %  Logistic Regression & 0.524 & 0.476 & 0.517 & 0.485 \\ 
          end-to-end Classifier (b) & 1e-4& 1 & 16 & 0.213 & 0.221 &0.207 & 0.118 \\
          param(a)                  & 1e-3& 10& 4  & 0.084 & 0.008 & 0.100 & 0.016 \\
-         param(b)                  & 1e-5& 50& 16 & 0.594 & 0.598 & 0.595 & 0.586 \\
+        %  param(b)                  & 1e-5& 50& 16 & 0.594 & 0.598 & 0.595 & 0.586 \\
+         param(b)                  & 1e-5& 50& 16 & 0.571 & 0.599 & 0.577 & 0.574 \\
          param(c)                  & 1e-4& 25& 8  & 0.084 & 0.008 & 0.100 & 0.016 \\ \hline
-         param(d)                  & 1e-5& 50& 8  & 0.605 & 0.608 & 0.608 & 0.601 \\
-         param(e)                  & 1e-5& 75& 16  & 0. & 0. & 0.  & 0. \\
-%         %  param(c)
-%         % none & 0.552 & 0.560 & 0.554 & 0.549 \\ 
-%         % l1 & 0.499 & 0.496 & 0.503 & 0.492 \\
-%         % \rowcolor[rgb]{0.9,0.9,0}l2 & 0.577 & 0.589 & 0.575 & 0.567 \\
-%         % elasticnet(ratio=0.5) & 0.535 & 0.557 & 0.537 & 0.531 \\
-
+        %  param(d)                  & 1e-5& 50& 8  & 0.605 & 0.608 & 0.608 & 0.601 \\
+         param(d)                  & 1e-5& 50& 8  & 0.583 & 0.595 & 0.584 & 0.580 \\
+         param(e)                  & 1e-5& 75& 16 & 0.583 & 0.611 & 0.590 & 0.581 \\
+         param(f)                  & 5e-6& 100& 8 & 0.560 & 0.577 & 0.577 & 0.555 \\
 
 
     \end{tabular}
@@ -529,8 +530,7 @@ The performance on test set of end-to-end model with parameter (???) is given be
     \scalebox{0.8}[0.8]{
     \begin{tabular}{l|lll|cccc}
          Approach & Learning\_rate & Epochs & Batch\_size & Accuracy & Precision & Recall & F1 \\ \hline 
-         param(d)                  & 1e-5& 50& 8  & 0.605 & 0.608 & 0.608 & 0.601 \\
-         param(e)                  & 1e-5& 100& 16  & 0. & 0. & 0.  & 0. \\
+         param(e)                  & 1e-5& 75& 16  & 0.597 & 0.617 & 0.592  & 0.591 \\
     \end{tabular}
     }
 \end{table}
@@ -538,24 +538,24 @@ The performance on test set of end-to-end model with parameter (???) is given be
 The confusion matrix is shown in Figure 5.
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=100mm]{figures/confusion_mat.png}
+  \includegraphics[width=100mm]{figures/confusion_mat_on_test.png}
   \caption{confusion matrix}
   \end{center}
 \end{figure}
 
 \subsection{Discussion on performance}
-The final performance of metrics were around (???? 多分0.6か7くらい).
-confusion matの傾向が高い場合: (aをbとまちがえやすいだけ)
-Since confusion matrix shows mistakes occured mainly with similar singers, it is successful in 
-detecting singer characteristics. Therefore, the performance is high enough for singers to maintain their trend,
-or for recommendation system of music service.
+The final performance of metrics were around 0.6
+% confusion matの傾向が高い場合: (aをbとまちがえやすいだけ)
+% Since confusion matrix shows mistakes occured mainly with similar singers, it is successful in 
+% detecting singer characteristics. Therefore, the performance is high enough for singers to maintain their trend,
+% or for recommendation system of music service.
 
-confusion matの傾向がない場合: (ランダムに間違える)
-Confusion matrix shows mistakes occured randomly, and thus the model fails to detect singer characteristics
-for about 40 percent. This performance is not high enough for singers to maintain their trend, so further
-improvements are needed.
-However, for recommendation system of music service, where people are likely to be more generous to errornous recommendation,
-this performance is high enough as it can show a song that fits a trend more frequently than a song that does not.
+% confusion matの傾向がない場合: (ランダムに間違える)
+% Confusion matrix shows mistakes occured randomly, and thus the model fails to detect singer characteristics
+% for about 40 percent. This performance is not high enough for singers to maintain their trend, so further
+% improvements are needed.
+% However, for recommendation system of music service, where people are likely to be more generous to errornous recommendation,
+% this performance is high enough as it can show a song that fits a trend more frequently than a song that does not.
 
 (D)
 As for possible negative social effects of deployment, people might start to write a songs that 
