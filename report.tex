@@ -28,47 +28,46 @@ The dataset used in this experiment is the lyrics of songs of famous singers.
 Singers are chosen from a ranking in a website, \href{https://www.thefamouspeople.com/21st-century-singers.php}{"The greatest 21st century singers"}, to minimise the arbitrary choice of the author.
 
 Lyrics were obtained by using lyricsgenius, a python API of Genius.com.
-Since lyrics were fetched online, it includes some HTML tokens and some meta data about translation inside the lyrics.
+Since lyrics were fetched online, they include some HTML tokens and some meta data about translation inside.
 The meta data about translation are supposed to be removed by preprocessing.
-Also, there are some faulty data where texts are not lyrics or lyrics are too short because it is cut in the middle of a song.
-Too short lyrics where the total length is under 300 characters are removed automatically, and too long data are removed manually by inspecting the text.
-To minimise the duplication of a same song, songs including certain keywords,such as "remix", "vergion", are ignored.
+Also, there are some faulty data where texts are not lyrics or lyrics are too short because they get cut in the middle of a song.
+Lyrics with the total length of under 300 characters are removed automatically, and texts that are too long are removed manually after inspection.
+To minimise the duplication of the same song, songs including certain keywords, such as "remix" or "vergion", in their titles are ignored.
 
 
-The main objective is to infer the singer from lyrics of a song.
+The main objective is to infer the singer from the lyrics of a song.
 I chose this dataset because I wanted to examine whether lyrics reflect singers' characteristics like the musical elements do.
 
 Automatic classification has several applications.
-It can be used for helping singers maintain the same trend among an album,
-suggesting new singers for music listeners in recommendation system of music service like Spotify, 
-detecting improper mimicking of the lyrics among singers. 
+It can be used to help singers maintain the same trend across an album,
+suggest new singers to music listeners in recommendation system of a music service like Spotify, and
+detect improper mimicking of the lyrics among other singers. 
 
 \subsection{b) Overview of input texts and labels}
-summary of the labels and input text to be used \\
-
-There are ten labels and each label is a name of a singer, which is to be predicted.
-Singers are: "Ariana Grande", "Michael Jackson","Taylor Swift","XXXTentacion","Eminem", "Lady Gaga","Selena Gomez","Beyonce Knowles","Dua Lipa",'Jennifer Lopez.'
+There are 10 labels and each label is a name of a singer, which is to be predicted.
+The singers are: "Ariana Grande", "Michael Jackson", "Taylor Swift", "XXXTentacion", "Eminem", "Lady Gaga", "Selena Gomez", "Beyonce Knowles", "Dua Lipa",
+"Jennifer Lopez".
 This dataset is not multi-label and does not consider a song from more than 2 singers.
-Preprocessing of labels were unnecessary because texts were collected from a label.
+Preprocessing of labels was unnecessary because texts were collected from a label.
 
 
 Input texts are a title of a song and its lyrics concatenated with a new line character.
 There are 1784 documents in total, 
 and the length of input texts varies from 305 characters to 13102 characters.
-The distribution of the length of text is shown in Figure 1.
-\begin{figure}[htbp]
-  \begin{center}
-  \includegraphics[width=70mm]{figures/text_length.png}
-  \caption{distribution of text length}
-  \end{center}
-\end{figure}
+% The distribution of the text length is shown in Figure 1.
+% \begin{figure}[htbp]
+%   \begin{center}
+%   \includegraphics[width=70mm]{figures/text_length.png}
+%   \caption{distribution of text length}
+%   \end{center}
+% \end{figure}
 
 
 
-\subsection{c) spliting data}
-The dataset is not split into a training, validation, and test set at first, 
+\subsection{c) Spliting data}
+The dataset was not split into training, validation, and test set at first, 
 so it was split into 60/20/20\% using "train\_test\_split" of scikit-learn.
-The label counts for each split dataset is shown in Figure 2.
+The label counts for each split dataset is shown in Figure 1.
 All labels have 100 to 200 documents in total and are not too imbalanced.
 
 
@@ -80,65 +79,52 @@ All labels have 100 to 200 documents in total and are not too imbalanced.
   \end{center}
 \end{figure}
 
-% \begin{table}[htbp]
-%   \centering
-%   \begin{tabular}{l|c|r}
-%     1 & 2 & 3 \\ \hline\hline
-%     sin & cos & tan \\
-%     apple & pine & banana \\ \hline
-%   \end{tabular}
-%   \caption{fugafuga}
-%   \label{tb:fugafuga}
-% \end{table}
-
-
-% \subsection{steps to build the dataset}
-
 \section{Q2- Clustering}
 \subsection{Vectorizing texts}
 Firstly, texts were converted into vectors to conduct clustering.
 TfidfVectorizer from scikit-learn, along with 'en\_core\_web\_sm' from spacy were used.
 
-Before converted to vectors, texts were firstly tokenized, and also stop words were removed.
-Stop words were defined by the spacy models and manually added words, which are mainly interjections as "oh", "ah."
-Such manually added words were chosen so that they do not show in the top 5 tokens of each cluster.
+Before being converted to vectors, texts were firstly tokenized, and also stop words were removed.
+Stop words were defined by the spacy models and manually added words, which are interjections such as "oh" or "ah."
+Such manually added words were chosen so that they do not appear in the top 5 tokens of each cluster.
 Stop words were removed because they do not convey much meaning and prevent understanding the characteristics of each cluster.
 
-As for input, a title and lyrics of a song combined was used for an input because a title tend to be too short.
+As for input, a title and lyrics of a song combined were used for the input because a title tends to be too short.
 
 
 \subsection{a) Documents assigned to each cluster}
 K-mean clustering was conducted with k=5.
-The first 120 characters of 2 documents in each cluster are shown below.
+The first 120 characters of 1 documents in each cluster are shown in Table 1.
 Newline characters are sometimes substituted with period(.) to shorten the table.
+Also, the title of another song in a label is also provided to shorten the table but to show other documents.
+
 
 \begin{table}[htb]
-
 \begin{center}
-\caption{2 documents in each cluster}
+\caption{1 document in each cluster and another song}
 
 \small
-\begin{tabular}{|c|c|} \hline
-
-  Label & Text \\ \hline \hline
+\scalebox{0.8}[0.8]{
+\begin{tabular}{|c|c|c|} \hline
+  Label & Text & Other songs\\ \hline \hline
 
     0&
     \begin{tabular}{l}
-      
     Moonlight. 
     Lyrics. \\
     The sun is setting and you're right here by my side \\
     And the movie is playing, but we won't be watching \\
-    \end{tabular}\\ \hline
+    \end{tabular} 
+    & Shady XV\\\hline
 
-    0&
-    \begin{tabular}{l}
+    % 0&
+    % \begin{tabular}{l}
       
-    Shady XV.
-    Shady XV Lyrics.\\
-    I'm liable to start a violent spark with a silent thought \\
-    I disgust you like dialogue from The  \\ 
-    \end{tabular}\\ \hline
+    % Shady XV.
+    % Shady XV Lyrics.\\
+    % I'm liable to start a violent spark with a silent thought \\
+    % I disgust you like dialogue from The  \\ 
+    % \end{tabular}\\ \hline
 
     1&
     \begin{tabular}{l}
@@ -148,14 +134,12 @@ Newline characters are sometimes substituted with period(.) to shorten the table
   Walk away.
   Don't walk away.\\
   See, I just can't find the right  \\
-    \end{tabular}\\ \hline
-
-    1&
-    \begin{tabular}{l}
-  On the Floor (Mixin Marc \& Tony Svejda L.A. to Ibiza Mix) \\
-  On the Floor (Mixin Marc \& Tony Svejda L.A. to Ibiza Mix) Lyri 
-    \end{tabular}\\ \hline
-  
+    \end{tabular}& On the Floor\\ \hline
+  %   1&
+  %   \begin{tabular}{l}
+  % On the Floor (Mixin Marc \& Tony Svejda L.A. to Ibiza Mix) \\
+  % On the Floor (Mixin Marc \& Tony Svejda L.A. to Ibiza Mix) Lyri 
+  %   \end{tabular}\\ \hline
     2&
     \begin{tabular}{l}
     INUYASHA.
@@ -165,17 +149,15 @@ Newline characters are sometimes substituted with period(.) to shorten the table
     100 hoes.
     BitBoy Beats.
     Acid, aci
-    \end{tabular}\\ \hline
-
-
-    2&
-    \begin{tabular}{l}
-    rare.
-    Lyrics.\\
-    Very fucking holy, very fucking rare \\
-    Even in broad daylight, I have this dream, I have this fantasy \\
-    Marvelo
-    \end{tabular}\\ \hline
+    \end{tabular} & rare. by XXXTentacion\\ \hline
+    % 2&
+    % \begin{tabular}{l}
+    % rare.(by)
+    % Lyrics.\\
+    % Very fucking holy, very fucking rare \\
+    % Even in broad daylight, I have this dream, I have this fantasy \\
+    % Marvelo
+    % \end{tabular}\\ \hline
 
 
     3&
@@ -186,16 +168,16 @@ Tryin' to get control.
 Pressure's takin' its toll \\
 Stuck in the middle zone.
 I jus
-    \end{tabular}\\ \hline
+    \end{tabular} & Freakshow by Lady Gaga\\ \hline
 
 
-    3&
-    \begin{tabular}{l}
-Freakshow.
-Freakshow Lyrics.\\
-'Cause I guarantee you've never seen a show like this before\\
-Gonna show you something that yo
-    \end{tabular}\\ \hline
+%     3&
+%     \begin{tabular}{l}
+% Freakshow.
+% Freakshow Lyrics.\\
+% 'Cause I guarantee you've never seen a show like this before\\
+% Gonna show you something that yo
+%     \end{tabular}\\ \hline
 
     
     4&
@@ -203,33 +185,28 @@ Gonna show you something that yo
 Scheiße (DJ White Shadow Mugler)\\
 Scheiße (DJ White Shadow Mugler) Lyrics\\
 I don't speak German, but I can if you like, ow
-    \end{tabular}\\ \hline
-    4&
-    \begin{tabular}{l}
-The Manifesto of Chromatica\\
-The Manifesto of Chromatica Lyrics\\
-When I was younger, I was at some point, born.
-I grew in 
-    \end{tabular}\\ \hline
-    
-    
-    
-    
+    \end{tabular} & The Manifesto of Chromatica\\ \hline
+%     4&
+%     \begin{tabular}{l}
+% The Manifesto of Chromatica\\
+% The Manifesto of Chromatica Lyrics\\
+% When I was younger, I was at some point, born.
+% I grew in 
+% %     \end{tabular}\\ \hline
   \end{tabular}
-
+}
 \end{center}
-
 \end{table}
 
  
-Besides, the top 5 tokens with highest magnitude in each centroid is listed below.  
+Besides, the top 5 tokens with highest magnitude in each centroid are listed in Table 2.  
 
 
 \begin{table}[htb]
 
   \begin{center}
   \caption{top 5 tokens in each centroid}
-
+  \small
   \begin{tabular}{|c|c|} 
     label & tokens\\ \hline \hline
     0 & know, feel, like, fuck, let \\ \hline
@@ -247,31 +224,23 @@ There are no easily recognisable distinct characteristics in each cluster shown 
 For example in Table 2, the token 'like' appeared in 3 clusters, and 'know' in 2.
 As for topics, no significant difference among clusters.
 \subsection{c) Confusion matrix}
-In Figure 3, a confusion matrix between 5 clusters and target labels is shown.
+In Figure 2, a confusion matrix between 5 clusters and target labels is shown.
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=100mm]{figures/confusion_mat2.png}
+  \includegraphics[width=90mm]{figures/confusion_mat2.png}
   \caption{confusion matrix}
   \end{center}
 \end{figure}
 \subsection{d) Examining the confusion matrix}
-From Figure 3, one can see that most texts are labelled to either cluster 0 or 3. 
+From Figure 2, one can see that most texts are labelled to either cluster 0 or 3. 
 For 'XXXTentacion' and 'Eminem', texts are gathered into 0 and a few texts into 3.
 Texts of other singers are almost evenly separated into cluster 0 and 3.
+Thus, none of the clusters is able to pick up a single target label.
 
-Thus, non of the clusters are able to pick up a single target label.
-
-% Subtle difference among clusters lies in the most prominent target label in a cluster.
-% The most prominent label for each cluster is: cluster 0 for 'Eminem', 1 for 'Michael Jackson', 2 for 'XXXTentacion', 
-% 3 for 'Michael Jackson', 4 for 'Ariana Grande'.
-% However, 
-The clusters differ subtly in terms of their most prominent target label. 
-Specifically, the most prominent label for each cluster is as follows: Cluster 0 corresponds to 'Eminem', Cluster 1 corresponds to 'Michael Jackson', Cluster 2 corresponds to 'XXXTentacion', Cluster 3 corresponds to 'Michael Jackson', and Cluster 4 corresponds to 'Ariana Grande'.
-This difference is, however, not significant at all.
-
-
-
+% The clusters differ subtly in terms of their most prominent target label. 
+% Specifically, the most prominent label for each cluster is as follows: Cluster 0 corresponds to 'Eminem', Cluster 1 corresponds to 'Michael Jackson', Cluster 2 corresponds to 'XXXTentacion', Cluster 3 corresponds to 'Michael Jackson', and Cluster 4 corresponds to 'Ariana Grande'.
+% This difference is, however, not significant at all.
 
 
 \section{Q3- Comparing Classifiers}
@@ -302,7 +271,7 @@ The highest performance is highlighted in yellow.
 \end{table}
 
 As shown in Table 3, the best-performing classifier by macro F1 on validation set is Logistic Regression with One-hot vectorization.
-A bar chart graph for F1 score for each class by this classifier is shown in Figure 4.
+A bar chart graph for F1 score for each class by this classifier is shown in Figure 3.
 \begin{figure}[htbp]
   \begin{center}
   \includegraphics[width=100mm]{figures/F1score.png}
@@ -502,7 +471,7 @@ It turned out that parameter(e) yield the best results.
          param(c)                  & 1e-4& 25& 8  & 0.084 & 0.008 & 0.100 & 0.016 \\ \hline
         %  param(d)                  & 1e-5& 50& 8  & 0.605 & 0.608 & 0.608 & 0.601 \\
          param(d)                  & 1e-5& 50& 8  & 0.583 & 0.595 & 0.584 & 0.580 \\
-         param(e)                  & 1e-5& 75& 16 & 0.583 & 0.611 & 0.590 & 0.581 \\
+         \rowcolor[rgb]{0.9,0.9,0}param(e)                  & 1e-5& 75& 16 & 0.583 & 0.611 & 0.590 & 0.581 \\
          param(f)                  & 5e-6& 100& 8 & 0.560 & 0.577 & 0.577 & 0.555 \\
 
 
@@ -522,12 +491,12 @@ whereas in end-to-end approach, models are retrained and likely to be more task-
 
 \section{Q6- Conclusions and Future Work}
 \subsection{Evaluating on Test Data}
-The performance on test set of end-to-end model with parameter (???) is given below.
+The performance on test set of end-to-end model with parameter(e) is given below.
 \begin{table}[htbp]
 %     \centering
     \caption{Metrics of End-to-End Classifier with Different Hyperparameters}
     \small
-    \scalebox{0.8}[0.8]{
+    \scalebox{1}[1]{
     \begin{tabular}{l|lll|cccc}
          Approach & Learning\_rate & Epochs & Batch\_size & Accuracy & Precision & Recall & F1 \\ \hline 
          param(e)                  & 1e-5& 75& 16  & 0.597 & 0.617 & 0.592  & 0.591 \\
@@ -535,7 +504,7 @@ The performance on test set of end-to-end model with parameter (???) is given be
     }
 \end{table}
 
-The confusion matrix is shown in Figure 5.
+The confusion matrix is shown in Figure 4.
 \begin{figure}[htbp]
   \begin{center}
   \includegraphics[width=100mm]{figures/confusion_mat_on_test.png}
