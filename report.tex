@@ -32,7 +32,7 @@ Singers are chosen from a ranking on a website called \href{https://www.thefamou
 \small{\url{https://www.thefamouspeople.com/21st-century-singers.php}}
 
 Lyrics were obtained by using lyricsgenius, a python API for Genius.com.
-To minimise the duplication of the same song, songs including certain keywords such as "remix" or "vergion" in their titles were ignored.
+To minimise the duplication of the same song, songs including certain keywords such as "remix" or "version" in their titles were ignored.
 Since lyrics were fetched online, they include some HTML tokens and metadata about translation.
 The metadata about translation is supposed to be removed by preprocessing.
 Also, there are some faulty data where the texts are not lyrics or the lyrics are too short because they are cut in the middle of a song.
@@ -79,7 +79,7 @@ There are a total of 1784 documents, and the length of the input texts varies fr
 \subsection{c) Spliting Data}
 The dataset was not split into training, validation, and test set at first, 
 so it was split into 60/20/20\% using "train\_test\_split" of scikit-learn.
-The label counts for each split dataset is shown in Figure 1.
+The label counts for each split dataset are shown in Figure 1.
 All of the labels have between 100 and 200 documents in total, and the data is not too imbalanced.
 
 \begin{figure}[htbp]
@@ -288,7 +288,7 @@ The highest performance is highlighted in yellow.
     }
 \end{table}
 
-As shown in Table 3, the best-performing classifier in terms of macro F1 on validation set is Logistic Regression with One-hot vectorization.
+As shown in Table 3, the best-performing classifier in terms of macro F1 on the validation set is Logistic Regression with One-hot vectorization.
 Figure 3 shows a bar chart graph of the F1 score for each class by this classifier.
 
 \begin{figure}[htbp]
@@ -298,12 +298,12 @@ Figure 3 shows a bar chart graph of the F1 score for each class by this classifi
   \end{center}
 \end{figure}
 
-The performance of dummy classifiers was low with F1 score were below 0.100,
+The performance of dummy classifiers was low with F1 score below 0.100,
 while the F1 scores of the other 3 classifiers were above 0.4 on the validation set
 and above 0.85 on the training set.
-This shows non-dummy classifiers overfit to Training set due to the gap between the training and validation sets.
+This shows non-dummy classifiers overfit to the training set due to the gap between the training and validation sets.
 
-Since each labels are almost equally distributed, the performance difference among labels can be attributed to the characteristics of the texts.
+Since each label is almost equally distributed, the performance difference among labels can be attributed to the characteristics of the texts.
 Logistic Regression(One-hot) classifiers worked well on 'XXXTentacion', 'Eminem', and 'Taylor Swift'.
 The low F1 score of 'Selena Gomez' might be due to the fewer number of texts labelled.
 
@@ -313,12 +313,12 @@ Apart from determining the random state and augmenting maximum iteration, the de
 \subsection{b) My Chosen Classifier}
 I chose a different preprocessing for the Tf-Idf vectorizer in a new classifier, where stop words and punctuation are not removed and Capital letters are not lowercased.
 Stop words are not removed because the frequency and variation of such words might differ from one song to another, and simple words tend to be used in songs.
-Punctuation in not removed because certain singers may use hyphenated words often, such as "P-p-p-poker" in "Poker Face" by Lady Gaga. 
+Punctuation is not removed because certain singers may use hyphenated words often, such as "P-p-p-poker" in "Poker Face" by Lady Gaga. 
 Also, Capital letters can capture the words with which a phrase start, so they are not removed.
 
 Logistic Regression was used to compare the result with the previous result.
 The result is shown in Table 4.
-It performed better than the 2 dummy clussifers, but worse than any of the 3 other classifiers in terms of all the metrics.
+It performed better than the 2 dummy classifiers, but worse than any of the 3 other classifiers in terms of all the metrics.
 Therefore, it is concluded removing stopwords and punctuations and lowercasing are also effective in the case for lyrics.
 
 
