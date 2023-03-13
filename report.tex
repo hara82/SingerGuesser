@@ -552,46 +552,60 @@ Also, the confusion matrix is shown in Figure 4.
 \end{figure}
 
 \subsection{Manually Examining the Result}
-(B)
-Considering the confusion matrix, Dua Lipa has higher False Positive.
-Also, more than half of False Negative for Lady Gaga is Dua lipa.
-Therefore, misclassification of Lady Gaga into Dua Lipa and Flase Positive for Dua Lipa are considered.
+According to the confusion matrix, "Dua Lipa" has a higher false positive.
+Also, more than half of false negatives for "Lady Gaga" are misclassified as "Dua Lipa".
+Therefore, misclassification of "Lady Gaga" into "Dua Lipa" and false positives for "Dua Lipa" were mainly considered.
 
 
-First, the write of a song is checked for the first case, as it can be possible those songs are written by Dua Lipa.
-However, those songs are actually written from Lady Gaga, while in some songs, several writers wrote them.
+% First, the writer of a song is checked for the first case, as it can be possible those songs are written by Dua Lipa and thus relfects her characteristics.
+% The 7 songs of the first case are:"Quicksand, Something Crazy, Wish You Were Here, Enigma, Bad Kids, Second Time Around, Love Me Right.
+% However, those songs are actually written from Lady Gaga, while in some songs she wrote them with other people.
 
-Next, it is hypothesized that lyrics are similar to Dua Lipa.
-This was examined by taking the average document similarity with Jaccard Similarity
-of every pair of misclassified songs and correctly classified songs.
+For the first case, the writer of the songs was checked as it is possible that the songs were written by "Dua Lipa" and thus reflect her characteristics.
+The seven songs in question are: "Quicksand," "Something Crazy," "Wish You Were Here," "Enigma," "Bad Kids," "Second Time Around," and "Love Me Right."
+However, these songs were actually written by "Lady Gaga", while in some cases, she wrote them with other people.
 
-Here, I write songs that are from "Lady Gaga" but classified as "Dua Lipa" as "Gaga\_Dua".
-This means False Positive for "Dua lipa" and False Negative for "Lady Gaga".
 
-The result showed that False Positives of Dua Lipa had higher Jaccard Similarity than 
-true labels for each one as shown in Table (???).
-This might explain the wrong classification, although this document similarity is not trustworthy enough.
-Since True Positives have small similarities with themselves.
+% Next, it is hypothesized that lyrics are similar to Dua Lipa.
+% This was examined by taking the average document similarity with Jaccard Similarity
+% of every pair of misclassified songs and correctly classified songs.
+
+Next, it was hypothesized that the lyrics are similar to those of Dua Lipa.
+This was examined by calculating the average document similarity with Jaccard similarity for every pair of misclassified songs and correctly classified songs.
+% Here, songs that are from "Lady Gaga" but classified as "Dua Lipa" are denoted as "Gaga Dua," which means false positives for "Dua Lipa" and false negatives for "Lady Gaga."
+Here, I denote songs that are from "Lady Gaga" but classified as "Dua Lipa" as "Gaga\_Dua".
+This means false positives for "Dua lipa" and false negatives for "Lady Gaga".
+
+% The result showed that False Positives of Dua Lipa had higher Jaccard Similarity than 
+% true labels for each one as shown in Table 11.
+% This might explain the wrong classification.
+% This document similarity, however, is not trustworthy enough as True Positives have small similarities with themselves.
+
+The results showed that false positives for Dua Lipa had higher Jaccard similarity than the true labels for each one, as shown in Table 11.
+This might explain the wrong classification.
+However, this document similarity is not trustworthy enough as true positives have small similarities with themselves.
+
 
 \begin{table}[htbp]
 \centering
 \caption{Accuracy Values}
+\small
 \begin{tabular}{|c|l|c|}
 \hline
 \textbf{Intention} & \textbf{Pairs} & \textbf{Accuracy} \\ \hline
-\multirow{5}{*}{False Negatives with True Labels} & Gaga\_Dua vs Gaga\_Gaga & 0.174 \\
+\multirow{5}{*}{FN of each singer vs TP of True Labels} & Gaga\_Dua vs Gaga\_Gaga & 0.174 \\
 & Taylor\_Dua vs Taylor\_Taylor & 0.209 \\
 & Ariana\_Dua vs Ariana\_Ariana & 0.199 \\
 & Selena\_Dua vs Selena\_Selena & 0.154 \\
 & Jennifer\_Dua vs Jennifer\_Jennifer & 0.188 \\
 \hline
-\multirow{5}{*}{False Positives of Dua Lipa} & Gaga\_Dua vs Dua\_Dua & 0.205 \\
+\multirow{5}{*}{FP of Dua Lipa vs TP of Dua Lipa} & Gaga\_Dua vs Dua\_Dua & 0.205 \\
 & Taylor\_Dua vs Dua\_Dua & 0.203 \\
 & Ariana\_Dua vs Dua\_Dua & 0.206 \\
 & Selena\_Dua vs Dua\_Dua & 0.194 \\
 & Jennifer\_Dua vs Dua\_Dua & 0.208 \\
 \hline
-\multirow{7}{*}{True Positives against themselves} & Dua\_Dua vs Dua\_Dua & 0.196 \\
+\multirow{7}{*}{TP docs against themselves} & Dua\_Dua vs Dua\_Dua & 0.196 \\
 & Gaga\_Gaga vs Gaga\_Gaga & 0.158 \\
 & Taylor\_Taylor vs Taylor\_Taylor & 0.207 \\
 & Ariana\_Ariana vs Ariana\_Ariana & 0.179 \\
@@ -599,7 +613,7 @@ Since True Positives have small similarities with themselves.
 & Jennifer\_Jennifer vs Jennifer\_Jennifer & 0.164 \\
 & XXX\_XXX vs XXX\_XXX & 0.128 \\
 \hline
-\multirow{5}{*}{True Positives against other True Positives} & Gaga\_Gaga vs Dua\_Dua & 0.164 \\
+\multirow{5}{*}{TP docs against other TP docs} & Gaga\_Gaga vs Dua\_Dua & 0.164 \\
 & Taylor\_Taylor vs Dua\_Dua & 0.195 \\
 & Ariana\_Ariana vs Dua\_Dua & 0.183 \\
 & Selena\_Selena vs Dua\_Dua & 0.148 \\
@@ -616,41 +630,58 @@ Since True Positives have small similarities with themselves.
 
 
 \subsection{Discussion on performance}
-(C)
 % The final performance of metrics were around 0.6.
-% Precision was higher than recall, and so it can be interpreted the model does not cover the whole characteristics of a singer,
-% but succeeded in capture the core feature of a singer.(あやしい)
-% Especially for "Eminem", metrics are so high that recall is 33/34, and  precision is 33/38 and succeeded in classification. 
+% Since the mistakes did not occur randomly but rather occured with similar songs,
+% and precision is higher than recall and  it can be interpreted the model does not cover the whole characteristics of a singer,
+% but succeeded in capture the core feature of a singer.
+% % Especially for "Eminem", metrics are so high that recall is 33/34, and  precision is 33/38 and succeeded in classification. 
 
+% Singers who got high recall and precision like "Eminem," this can be helpful to maintain their trend. 
+% But it might not good enough for other singers that are prone to be misclassified.
+
+% However, for music recommendation systems, where people are more likely to be forgiving of erroneous recommendations, 
+% this level of performance may be sufficient as it can lead to more frequent recommendations of songs that fit a trend than songs that do not.
+
+%ごみ
 % confusion matの傾向が高い場合: (aをbとまちがえやすいだけ)
-Since confusion matrix shows mistakes occured mainly with similar singers, it is successful in 
-detecting singer characteristics. 
-In order for singers to maintain their tren,or for recommendation system of music service.
+% Since confusion matrix shows mistakes occured mainly with similar singers, it is successful in 
+% detecting singer characteristics. 
+% In order for singers to maintain their tren,or for recommendation system of music service.
 
 % confusion matの傾向がない場合: (ランダムに間違える)
 % Confusion matrix shows mistakes occured randomly, and thus the model fails to detect singer characteristics
 % for about 40 percent. This performance is not high enough for singers to maintain their trend, so further
 % improvements are needed.
-However, for recommendation system of music service, where people are likely to be more generous to errornous recommendation,
-this performance is high enough as it can show a song that fits a trend more frequently than a song that does not.
+% However, for recommendation system of music service, where people are likely to be more generous to errornous recommendation,
+% this performance is high enough as it can show a song that fits a trend more frequently than a song that does not.
 
-(D)
-As for possible negative social effects of deployment, people might start to write a songs that 
-are likely to be recommended, and thus harms the diversity of songs and people's negative attitude towards recommendation system.
-Another possible case is that singers become reluctant to publish the songs that have different characteristics from their other songs,
-afraid of being suspected stealing lyrics or change their style.
-This also might leads to less diversity.
+The final performance metrics were around 0.6, and the confusion matrix and further inspection indicate that mistakes were not random but rather occurred with similar songs.
+The model had higher precision than recall, suggesting that it captured the core features of a singer but did not cover their whole characteristics.
 
-(E)
-One step is making the data cleaner.
-The lyrics used in this experiment is taken from the web and contain other data, such as 
-html token, or translation data. Removing theese completely can improve the performance.
-Another step is integrating data from other source as the year published, the number of the song covered by other singers, 
-the singers' comments on a song.
-Tuning hyperparameters thoroughly and also trying other models from "roberta\_base" might also result in better performance might also result in better performance.
+Singers with high recall and precision, such as Eminem, could benefit from this in maintaining their trend across songs,
+but other singers that are more prone to misclassification may not. 
 
+On the other hand, for music recommendation systems, where people are more forgiving of erroneous recommendations, this level of performance may be sufficient.
+% as it can lead to more frequent recommendations of songs that fit a trend than those that do not, as metrics are over 0.5.
 
-(F)
-40hours
+\subsection{Possible Negative Social Effects}
+
+As for the possible negative social effects of deployment, people might start to write songs that 
+are likely to be recommended, and thus harming the diversity of songs and fostering negative attitudes towards recommendation system.
+Another possible outcome is that singers reluctant to publish the songs that have different characteristics from their other songs,
+fearing being suspected of stealing lyrics or changing their style.
+This, too, might leads to less diversity.
+
+\subsection{Steps for Further Improvement}
+One step is to make the data cleaner.
+The lyrics used in this experiment are taken from the web and contain other data, such as 
+HTML token, or translation data. 
+Removing these completely can improve the performance.
+
+Another step is to integrate data from other sources, such as the year published, the number of times a song has been covered by other singers, and the singers' comments on a song.
+Tuning hyperparameters thoroughly and trying models other than "roberta\_base" might also result in better performance may also result in better performance.
+
+\subsection{Hours taken}
+50hours
 
 \end{document}
