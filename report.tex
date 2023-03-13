@@ -84,8 +84,8 @@ All of the labels have between 100 and 200 documents in total, and the data is n
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=140mm]{figures/text_labels2.png}
-  \caption{label counts for each split}
+  \includegraphics[width=160mm]{figures/text_labels2.png}
+  \caption{Label Counts for Each Split}
   \end{center}
 \end{figure}
 
@@ -241,8 +241,8 @@ In Figure 2, a confusion matrix between 5 clusters and target labels is shown.
 
 \begin{figure}[htbp]
   \begin{center}
-  \includegraphics[width=90mm]{figures/confusion_mat2.png}
-  \caption{confusion matrix}
+  \includegraphics[width=110mm]{figures/confusion_mat2.png}
+  \caption{Confusion Matrix of Clustering}
   \end{center}
 \end{figure}
 \subsection{d) Examining the Confusion Matrix}
@@ -271,7 +271,7 @@ The highest performance is highlighted in yellow.
     \centering
     \caption{Comparison of Metrics for 5 Classifiers}
     \label{tab:classifier_metrics}
-    \small
+    % \small
     \scalebox{0.8}[0.8]{
     \begin{tabular}{l|cccc|cccc}
         \hline
@@ -326,8 +326,8 @@ Therefore, it is concluded removing stopwords and punctuations and lowercasing a
 
 \begin{table}[htbp]
     \centering
-    \caption{Metrics for classifier without stop-words removal}
-    \small
+    \caption{Metrics for Classifier Without Stopwords Removal}
+    % \small
     \scalebox{0.8}[0.8]{
     \begin{tabular}{l|cccc|cccc}
         \hline
@@ -354,7 +354,7 @@ It is shown $C=10$ is the best parameter.%, and the metrics gradually decreases 
 \begin{table}[htbp]
     \centering
     \caption{Performance with Different Regularisation C Value}
-    \small
+    % \small
     \scalebox{0.8}[0.8]{
     \begin{tabular}{l|cccc}
         C value & Accuracy & Precision & Recall & F1 \\ \hline 
@@ -379,7 +379,7 @@ The best combination is max\_features=5000 and  sublinear\_tf = True (Table 6).
 \begin{table}[htbp]
     \centering
     \caption{Performance with Different Vectorizer Parameter}
-    \small
+    % \small
     \scalebox{0.8}[0.8]{
     \begin{tabular}{l|l|cccc}
         max\_features & sublinear\_tf & Accuracy & Precision & Recall & F1 \\ \hline 
@@ -428,7 +428,7 @@ Therefore, a complex model that is sensitive to tiny differences might be necess
 \begin{table}[htbp]
     \centering
     \caption{Performance with Different Penalty Term}
-    \small
+    % \small
     \scalebox{0.8}[0.8]{
     \begin{tabular}{l|cccc}
         Penalty Term & Accuracy & Precision & Recall & F1 \\ \hline 
@@ -454,8 +454,8 @@ The results are shown in Table 8.
 \begin{table}[htbp]
     \centering
     \caption{Metrics of Logistic Regression using [CLS] Token}
-    \small
-    \scalebox{0.8}[0.8]{
+    % \small
+    \scalebox{0.9}[0.9]{
     \begin{tabular}{l|cccc}
          Approach & Accuracy & Precision & Recall & F1 \\ \hline 
          Logistic Regression & 0.524 & 0.476 & 0.517 & 0.485 \\ 
@@ -530,28 +530,28 @@ whereas in the end-to-end approach, models are retrained and likely to be more t
 
 \section{Q6- Conclusions and Future Work}
 \subsection{Evaluating on Test Data}
-The performance on test set of end-to-end model with parameter(e) is given below.
+The performance on the test set of the end-to-end model with the parameter(e) is shown in Table 10.
+Also, the confusion matrix is shown in Figure 4.
 \begin{table}[htbp]
     \centering
-    \caption{Metrics of End-to-End Classifier with Different Hyperparameters}
+    \caption{Metrics on Test Set}
     \small
     \scalebox{1}[1]{
     \begin{tabular}{l|lll|cccc}
          Approach & Learning\_rate & Epochs & Batch\_size & Accuracy & Precision & Recall & F1 \\ \hline 
-         param(e)                  & 1e-5& 75& 16  & 0.597 & 0.617 & 0.592  & 0.591 \\
+         end-to-end parameter(e)                  & 1e-5& 75& 16  & 0.597 & 0.617 & 0.592  & 0.591 \\
     \end{tabular}
     }
 \end{table}
 
-The confusion matrix is shown in Figure 4.
-\begin{figure}[htbp]
+\begin{figure}[H]
   \begin{center}
-  \includegraphics[width=100mm]{figures/confusion_mat_on_test.png}
-  \caption{confusion matrix}
+  \includegraphics[width=120mm]{figures/confusion_mat_on_test.png}
+  \caption{Confusion Matrix for Test Data}
   \end{center}
 \end{figure}
 
-\subsection{manually examining the result}
+\subsection{Manually Examining the Result}
 (B)
 Considering the confusion matrix, Dua Lipa has higher False Positive.
 Also, more than half of False Negative for Lady Gaga is Dua lipa.
@@ -652,21 +652,5 @@ Tuning hyperparameters thoroughly and also trying other models from "roberta\_ba
 
 (F)
 40hours
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 \end{document}
