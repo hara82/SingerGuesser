@@ -28,7 +28,8 @@
 \section{Q1- Dataset}
 \subsection{a) Overview of Data}% 数式
 The dataset used in this experiment is the lyrics of songs by famous singers. 
-Singers are chosen from a ranking on a website called \href{https://www.thefamouspeople.com/21st-century-singers.php}{"The greatest 21st century singers"}, to minimise the arbitrary choice of the author.
+Singers are chosen from a ranking on a website called \href{https://www.thefamouspeople.com/21st-century-singers.php}{"The greatest 21st century singers,"}, to minimise the arbitrary choice of the author.
+\small{\url{https://www.thefamouspeople.com/21st-century-singers.php}}
 
 Lyrics were obtained by using lyricsgenius, a python API for Genius.com.
 Since lyrics were fetched online, they include some HTML tokens and metadata about translation.
@@ -373,7 +374,7 @@ It is shown $C=10$ is the best parameter.%, and the metrics gradually decreases 
 \subsection{Vectorizer}
 The parameters of vectorizer,that are sublenear\_tf and max\_features, are tuned here.
 The regularisation parameter C is set to 10 based on the previous results.
-The best combination is max\_features=5000 and  sublinear\_tf = True. 
+The best combination is max\_features=5000 and  sublinear\_tf = True (Table 6). 
 
 \begin{table}[htbp]
     \centering
@@ -407,22 +408,22 @@ The best combination is max\_features=5000 and  sublinear\_tf = True.
 The penalty term of the Logistic Regression was changed from 'none', 'l1', 'l2', to 'elasticnet' to tackle potential overfitting problems identified in Table 3.
 By tuning the penalty term, I aim to create simpler or more complex models, with the expectation that simpler models might perform better on the validation dataset.
 In order to use the l1 penalty term, solver was changed from 'lbfgs' to 'saga.'
+The best performance was obtained by using l2 term as shown in Table 7.
 
 \subsection{Interpretation of Parameter Choice}
-As for Regularisation C of Logistic Regression, larger C tends to return better results.
-Thus, a model with more freedom was appropriate.
-
-As to Vectorizer, max\_features needed to be large enough as expected easily because too few tokens cannot distinguish separate documents.
-sublinear\_tf = True, which means taking the logarithm of tf brought better result.
-This might result from the characteristics of lyrics where same words and phrases are prune to used highly repeatedly.
-
-As for Penalty term, l2 penalty, which returns more dense model than l1 penalty resulted in a better result.
-Combined with the discussion of C, the more complex model result in the better result.
-This might be because the distinction of each document is subtle as in Section 2 most documents are classified into either of 2 labels.
-Therefore, complex model that is sensitive to tiny difference might be necessary.
 
 
+In the case of the regularization C for Logistic Regression, a larger value tends to yield better results.
+Thus, a model with more freedom was considered appropriate. 
+For the Vectorizer, it was important to set the max features parameter to a sufficiently large value, 
+as too few tokens cannot distinguish between separate documents.
+Additionally, setting sublinear\_tf = True, which takes the logarithm of tf, led to better results.
+This might be due to the characteristics of lyrics where same words and phrases are used repeatedly and frequently.
 
+Regarding the Penalty term, using l2 penalty, which returns a more dense model than l1 penalty, resulted in better performance.
+Combined with the discussion of C, a more complex model was found to yield better results.
+One reason for this might be that the distinction between each document is subtle, as seen in Section 2 where most documents are classified into only two labels. 
+Therefore, a complex model that is sensitive to tiny differences might be necessary.
 
 \begin{table}[htbp]
     \centering
@@ -445,7 +446,10 @@ Therefore, complex model that is sensitive to tiny difference might be necessary
 
 \section{Context vectors using BERT}
 
-\subsection{feature extraction and logistic regression}
+\subsection{Feature Extraction and Logistic Regression}
+Here, the texts are converted into context vectors using the 'feature-extraction' pipeline with the "roberta\_base" model in HuggingFace library.
+The vectors of the first [CLS] tokens were used for a Logistic Regression classifier.
+The results are shown in Table 8.
 
 \begin{table}[htbp]
     \centering
@@ -460,43 +464,54 @@ Therefore, complex model that is sensitive to tiny difference might be necessary
 
     }
 \end{table}
-\subsection{end-to-end trained classifier}
-An end-to-end classifier was implemented and evaluated.
-After that, hyper parameters were tuned and evaluated.
-The result is shown  in Table 9.
-parameter(a) was selected so that the model be sensitive to each data 
-by decreasing batch\_size and increasing learning rate.
-parameter(b) was selected so that the model be less sensitive to each data
-with large batch\_size and small learning\_rate. Epochs were increased to help model to converge.
-The maximum size of batch\_size was 16 due to memory problem.
-parameter(c) was chosen to be the middle of parameter(a) and parameter(b).
+\subsection{End-to-End Trained Classifier}
+% An end-to-end classifier was implemented and evaluated using the indicated parameters at first.
+% After that, hyper parameters were tuned and evaluated.
+% The details of hyper parameters and the results are shown  in Table 9.
 
-Experiment showed parameter(b) yields higher scores than others, and therefore
-parameter(d) and parameter(e), which are slightly modified from parameter(b) was chosen and tested.
+% parameter(a) was selected so that the model be sensitive to each data 
+% by decreasing batch\_size and increasing learning rate.
+% parameter(b) was selected so that the model be less sensitive to each data
+% with large batch\_size and small learning\_rate. Epochs were increased to help model to converge.
+% The maximum size of batch\_size was 16 due to memory problem.
+% parameter(c) was chosen to be the middle of parameter(a) and parameter(b).
+
+% Experiment showed parameter(b) yields higher scores than others on the validation set, and therefore
+% parameter(d), parameter(e) and parameter(f), which are slightly modified from parameter(b) were chosen and tested.
 
 
+% It turned out that parameter(e) yield the best results as in Table 9.
+Initially, an end-to-end classifier was implemented and evaluated using the specified parameters.
+After this, hyperparameters were tuned and evaluated, with details and results presented in Table 9.
 
-%%%%やばい
-It turned out that parameter(e) yield the best results.
+Parameter (a) was chosen to increase the model's sensitivity to each data point by decreasing batch size and increasing learning rate,
+while parameter (b) was chosen to make the model less sensitive to each data point using larger batch sizes and smaller learning rates.
+Epochs were increased to help the model converge.
+The batch size was set to 16 because this was the maximum due to memory constraints.
+Parameter (c) was selected as a middle point between parameter (a) and parameter (b).
 
+Experiments revealed that parameter (b) yielded higher scores than the other options on the validation set.
+Therefore, parameter (d), parameter (e), and parameter (f), which were slightly modified from parameter (b), were selected and tested.
+
+Ultimately, it was found that parameter (e) produced the best results, as shown in Table 9.
 
 \begin{table}[htbp]
-%     \centering
+    \centering
     \caption{Metrics of End-to-End Classifier with Different Hyperparameters}
     \small
     \scalebox{0.8}[0.8]{
     \begin{tabular}{l|lll|cccc}
-         Approach & Learning\_rate & Epochs & Batch\_size & Accuracy & Precision & Recall & F1 \\ \hline 
+         Approach & Learning\_rate & Epochs & Batch\_size & Accuracy & Precision & Recall & F1 \\ \hline \hline
         %  Logistic Regression & 0.524 & 0.476 & 0.517 & 0.485 \\ 
-         end-to-end Classifier (b) & 1e-4& 1 & 16 & 0.213 & 0.221 &0.207 & 0.118 \\
-         param(a)                  & 1e-3& 10& 4  & 0.084 & 0.008 & 0.100 & 0.016 \\
+         end-to-end Classifier (b) & 1e-4& 1 & 16 & 0.213 & 0.221 &0.207 & 0.118 \\ \hline
+         parameter(a)                  & 1e-3& 10& 4  & 0.084 & 0.008 & 0.100 & 0.016 \\
         %  param(b)                  & 1e-5& 50& 16 & 0.594 & 0.598 & 0.595 & 0.586 \\
-         param(b)                  & 1e-5& 50& 16 & 0.571 & 0.599 & 0.577 & 0.574 \\
-         param(c)                  & 1e-4& 25& 8  & 0.084 & 0.008 & 0.100 & 0.016 \\ \hline
+         parameter(b)                  & 1e-5& 50& 16 & 0.571 & 0.599 & 0.577 & 0.574 \\
+         parameter(c)                  & 1e-4& 25& 8  & 0.084 & 0.008 & 0.100 & 0.016 \\ \hline
         %  param(d)                  & 1e-5& 50& 8  & 0.605 & 0.608 & 0.608 & 0.601 \\
-         param(d)                  & 1e-5& 50& 8  & 0.583 & 0.595 & 0.584 & 0.580 \\
-         \rowcolor[rgb]{0.9,0.9,0}param(e)                  & 1e-5& 75& 16 & 0.583 & 0.611 & 0.590 & 0.581 \\
-         param(f)                  & 5e-6& 100& 8 & 0.560 & 0.577 & 0.577 & 0.555 \\
+         parameter(d)                  & 1e-5& 50& 8  & 0.583 & 0.595 & 0.584 & 0.580 \\
+         \rowcolor[rgb]{0.9,0.9,0}parameter(e)                  & 1e-5& 75& 16 & 0.583 & 0.611 & 0.590 & 0.581 \\
+         parameter(f)                  & 5e-6& 100& 8 & 0.560 & 0.577 & 0.577 & 0.555 \\
 
 
     \end{tabular}
@@ -505,19 +520,19 @@ It turned out that parameter(e) yield the best results.
 \end{table}
 
 % \subsection{Selecting hyperparameters and models}
-\subsection{Examining models and parameters}
-It turned out that end-to-end model performed better than using context vectors from the pipeline approach.
-While context vectors approach only uses [CLS] token that has altered by the accompanied words,
-end-to-end approach makes use of the whole text.
-Besides, context vectors are generated from a frozen model which is not specialised in this setting,
-whereas in end-to-end approach, models are retrained and likely to be more task-specific.
+\subsection{Examining Models and Parameters}
+It turned out that the end-to-end model outperformed the context vectors approach.
+Possible explanation is  that while the context vectors approach only uses the [CLS] token that is altered by the accompanying words,
+the end-to-end approach makes use of the entire text.
+Besides, context vectors are generated from a frozen model that is not specialized for this particular task,
+whereas in the end-to-end approach, models are retrained and likely to be more task-specific.
 
 
 \section{Q6- Conclusions and Future Work}
 \subsection{Evaluating on Test Data}
 The performance on test set of end-to-end model with parameter(e) is given below.
 \begin{table}[htbp]
-%     \centering
+    \centering
     \caption{Metrics of End-to-End Classifier with Different Hyperparameters}
     \small
     \scalebox{1}[1]{
